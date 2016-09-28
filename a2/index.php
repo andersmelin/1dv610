@@ -3,7 +3,7 @@ session_start();
 //$_SESSION["username"] = "JKJJ";
 
 // SET ROOT FOLDER FOR EASY ACCESS
-$_SERVER["ROOT"] = $_SERVER["DOCUMENT_ROOT"] . "/1dv610-a2/";
+$_SERVER["ROOT"] = $_SERVER["DOCUMENT_ROOT"] . "/1dv610/a2/";
 
 // INCLUDE VIEWS
 require_once('view/Layout.php');

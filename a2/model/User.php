@@ -18,6 +18,7 @@ class User{
 private $pdo;
 
   public function connect() {
+    echo "IM RUNNING";
     if ($this->pdo == null) {
       $this->pdo = new \PDO("sqlite:model/db/1dv610.db");
     }
