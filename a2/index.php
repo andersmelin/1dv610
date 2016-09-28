@@ -1,6 +1,5 @@
 <?php
 session_start();
-//$_SESSION["username"] = "JKJJ";
 
 // SET ROOT FOLDER FOR EASY ACCESS
 $_SERVER["ROOT"] = $_SERVER["DOCUMENT_ROOT"] . "/1dv610/a2/";
@@ -61,9 +60,5 @@ if(isset($postdata->action)){
 
 }
 
-
-
-
 // RENDER PAGE
-
 (new Layout($maincontent, $message, $username, $password))->render();
