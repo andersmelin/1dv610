@@ -15,18 +15,7 @@ class User{
 
     $this->createNewTableIfNotExists();
   }
-private $pdo;
 
-  public function connect() {
-    echo "IM RUNNING";
-    if ($this->pdo == null) {
-      $this->pdo = new \PDO("sqlite:model/db/1dv610.db");
-    }
-
-    $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    return $this->pdo;
-  }
   public function get($username){
     $query = "SELECT username, password, cookiepassword FROM users WHERE username = '{$username}'";
     $result = $this->db->query($query);
