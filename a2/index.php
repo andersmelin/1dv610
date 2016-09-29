@@ -48,7 +48,7 @@ if(isset($postdata->action)){
 
 $username    = (isset($controller->username))    ? $controller->username    : "";
 $password    = (isset($controller->password))    ? $controller->password    : "";
-if(!$message){
+if(!isset($message)){
   $message     = (isset($controller->message))     ? $controller->message     : "";
 }
 if(!isset($maincontent)){
