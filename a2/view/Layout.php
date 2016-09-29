@@ -17,7 +17,7 @@ class Layout {
 
   private $args;
 
-  public function __construct($maincontent = "Loginform", $message = "", $username = "", $password = ""){
+  public function __construct($maincontent, $message, $username, $password){
     $this->isLoggedIn = (new IsLoggedIn())->show;
     $this->dateTimeParagraph = (new DateTimeParagraph())->show;
     $this->maincontent = (new $maincontent($message, $username, $password))->show;

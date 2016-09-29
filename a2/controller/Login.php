@@ -1,16 +1,24 @@
 <?php
 
+require_once("Auth.php");
+
 class Login extends Auth{
 
   public function __construct($username, $password){
     parent::__construct($username, $password, null, null);
-
-    if($this->user->authenticate($this->username, $this->password)){
-      $_SESSION['username'] = $this->username;
+    if($this->user->authenticate($username, $password)){
+      $_SESSION['username'] = $username;
       $this->maincontent = "Logoutform";
-      $this->message = $this->generateMessage();
+
+    } else {
+      $this->maincontent = "Loginform";
     }
+
+    $this->message = $this->generateMessage();
   }
+
+
+
 
   private function generateMessage(){
     if(!$this->username){
