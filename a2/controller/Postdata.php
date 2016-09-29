@@ -15,7 +15,7 @@ class Postdata {
         $key = "action";
         $value = "logout";
       }
-      if($key == "doregistration" || $key == "doregistration"){
+      if($key == "doregistration" || $key == "doregistration" || $key == "register"){
         $key = "action";
         $value = "Register";
       }
