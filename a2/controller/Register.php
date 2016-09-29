@@ -5,6 +5,7 @@ require_once("Auth.php");
 class Register extends Auth{
 
   protected $passwordRepeat;
+  private $blacklist = array("<", ">", "/");
 
   public function __construct($username, $password, $passwordRepeat){
 
@@ -17,6 +18,7 @@ class Register extends Auth{
     } else {
       $this->maincontent = "Registrationform";
       $this->message = $this->generateMessage();
+      $this->escapeIllegalChars();
     }
   }
 
@@ -28,12 +30,22 @@ class Register extends Auth{
     return mb_strlen($this->password, "utf8") > 5;
   }
 
+  private function valideChars(){
+    return ($this->username == str_replace($this->blacklist, "", $this->username)
+         && $this->password == str_replace($this->blacklist, "", $this->password));
+  }
+
+  private function escapeIllegalChars(){
+    $this->username = str_replace($this->blacklist, "", $this->username);
+    $this->password == str_replace($this->blacklist, "", $this->password);
+  }
+
   private function comparePasswords(){
     return $this->password == $this->passwordRepeat;
   }
 
   private function validateAll(){
-    return ($this->validateUsernameLength() && $this->validatePasswordLength() && $this->comparePasswords() && !$this->user->exists($this->username));
+    return ($this->valideChars() && $this->validateUsernameLength() && $this->validatePasswordLength() && $this->comparePasswords() && !$this->user->exists($this->username));
   }
 
   private function generateMessage(){
@@ -47,6 +59,10 @@ class Register extends Auth{
 
     if(!$this->comparePasswords()){
       return "Passwords do not match.";
+    }
+
+    if(!$this->valideChars()){
+      return "Username contains invalid characters.";
     }
 
     if($this->user->exists($this->username)){
