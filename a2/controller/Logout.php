@@ -2,7 +2,7 @@
 
 class Logout{
 
-  public $message = "Bye Bye!";
+  public $message = "Bye bye!";
   public $maincontent = "Loginform";
 
   public function __construct(){

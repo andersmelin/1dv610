@@ -10,10 +10,10 @@ class Registrationform {
     <form action='?register' method='post' enctype='multipart/form-data'>
 				<fieldset>
 				<legend>Register a new user - Write username and password</legend>
-					<p id='LoginView::Message'>{$message}</p>
+					<p id='RegisterView::Message'>{$message}</p>
 
 					<label>Username:
-					     <input type='text' size='20' name='RegisterView::UserName' id='RegisterView::UserName' <value='{$username}'>
+					     <input type='text' size='20' name='RegisterView::UserName' id='RegisterView::UserName' value='{$username}'>
 					</label>
 
 					<label>Password:
