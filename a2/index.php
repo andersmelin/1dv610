@@ -22,6 +22,7 @@ ini_set('display_errors', 'On');
 
 // chmod 777 -R ./db
 $postdata = new Postdata();
+echo '<pre>'; var_dump($postdata); echo '</pre>';
 if(isset($postdata->action)){
 
   if($postdata->action == "logout" && isset($_SESSION['username'])){
