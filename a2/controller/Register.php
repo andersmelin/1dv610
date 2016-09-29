@@ -5,7 +5,6 @@ require_once("Auth.php");
 class Register extends Auth{
 
   protected $passwordRepeat;
-  private $blacklist = array("<", ">", "/");
 
   public function __construct($username, $password, $passwordRepeat){
 
@@ -18,7 +17,7 @@ class Register extends Auth{
     } else {
       $this->maincontent = "Registrationform";
       $this->message = $this->generateMessage();
-      $this->escapeIllegalChars();
+      $this->stripTagsFromUsernameAndPassword();
     }
   }
 
@@ -31,13 +30,12 @@ class Register extends Auth{
   }
 
   private function valideChars(){
-    return ($this->username == str_replace($this->blacklist, "", $this->username)
-         && $this->password == str_replace($this->blacklist, "", $this->password));
+    return ($this->username == strip_tags($this->username) && $this->password == strip_tags($this->password));
   }
 
-  private function escapeIllegalChars(){
-    $this->username = str_replace($this->blacklist, "", $this->username);
-    $this->password == str_replace($this->blacklist, "", $this->password);
+  private function stripTagsFromUsernameAndPassword(){
+    $this->username = strip_tags($this->username);
+    $this->password == strip_tags($this->password);
   }
 
   private function comparePasswords(){
