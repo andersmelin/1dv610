@@ -6,7 +6,13 @@ class Logout{
   public $maincontent = "Loginform";
 
   public function __construct(){
-    unset($_SESSION['username']);
+    if(isset($_SESSION['username'])){
+      unset($_SESSION['username']);
+
+    } else {
+      $this->message = "";
+    }
+
     session_destroy();
   }
 }

@@ -23,9 +23,9 @@ ini_set('display_errors', 'On');
 // chmod 777 -R ./db
 $postdata = new Postdata();
 
-if(isset($postdata->action)){
+if(!empty($postdata->action)){
 
-  if($postdata->action == "logout" && isset($_SESSION['username'])){
+  if($postdata->action == "logout"){ // && isset($_SESSION['username'])
     $controller = new Logout();
 
   } else if(isset($_SESSION['username'])){
