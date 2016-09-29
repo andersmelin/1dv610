@@ -6,6 +6,7 @@ class Login extends Auth{
 
   public function __construct($username, $password){
     parent::__construct($username, $password, null, null);
+    
     if($this->user->authenticate($username, $password)){
       $_SESSION['username'] = $username;
       $this->maincontent = "Logoutform";
@@ -16,9 +17,6 @@ class Login extends Auth{
 
     $this->message = $this->generateMessage();
   }
-
-
-
 
   private function generateMessage(){
     if(!$this->username){

@@ -19,13 +19,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 // ROUTER
-
-// chmod 777 -R ./db
 $postdata = new Postdata();
 
 if(!empty($postdata->action)){
 
-  if($postdata->action == "logout"){ // && isset($_SESSION['username'])
+  if($postdata->action == "logout"){
     $controller = new Logout();
 
   } else if(isset($_SESSION['username'])){
@@ -38,16 +36,16 @@ if(!empty($postdata->action)){
     $controller = new Register($postdata->username, $postdata->password, $postdata->passwordrepeat);
 
   } else {
-    $message = '<pre>' . var_dump($postdata) . '</pre>';
-    //throw new Exception("Unhandled POST request: " . $postdata->action);
+    // echo '<pre>'; echo var_dump($postdata); echo'</pre>';
+    throw new Exception("Unhandled POST request");
   }
 
 } else if(in_array("register", array_keys($_GET))){
     $maincontent = "Registrationform";
 }
 
-$username    = (isset($controller->username))    ? $controller->username    : "";
-$password    = (isset($controller->password))    ? $controller->password    : "";
+$username      = (isset($controller->username))    ? $controller->username    : "";
+$password      = (isset($controller->password))    ? $controller->password    : "";
 if(!isset($message)){
   $message     = (isset($controller->message))     ? $controller->message     : "";
 }

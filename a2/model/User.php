@@ -30,9 +30,7 @@ class User{
       ];
     }
 
-    //echo '<pre>'; var_dump($user[0]); echo '</pre>';
     return (count($user)) ? $user[0] : false;;
-
   }
 
   private function createNewTableIfNotExists(){
