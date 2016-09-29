@@ -4,7 +4,7 @@ class Logoutform {
 
   public $show;
 
-  public function __construct($message = "", $username = "", $password = ""){
+  public function __construct($message, $username, $password){
     $this->show = "
     <form  method='post'>
 		<p id='LoginView::Message'>{$message}</p>

@@ -34,7 +34,7 @@ if(isset($postdata->action)){
   } else if($postdata->action == "login"){
     $controller = new Login($postdata->username, $postdata->password);
 
-  } else if($postdata->action == "register"){
+  } else if($postdata->action == "Register"){
     $controller = new Register($postdata->username, $postdata->password, $postdata->passwordrepeat);
 
   } else {

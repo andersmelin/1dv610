@@ -10,7 +10,7 @@ class Navigationlink {
       $this->show = "<a href='?register'>Register a new user</a>";
 
     } else if($maincontent == "Registrationform"){
-      $this->show = "<a href=?>Back to login</a>";
+      $this->show = "<a href='?'>Back to login</a>";
     }
 	}
 }

@@ -18,7 +18,6 @@ class Register extends Auth{
       $this->maincontent = "Registrationform";
       $this->message = $this->generateMessage();
     }
-
   }
 
   private function validateUsernameLength(){
