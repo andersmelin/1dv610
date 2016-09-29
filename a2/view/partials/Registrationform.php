@@ -4,10 +4,10 @@ class Registrationform {
 
 	public $show;
 
-	public function __construct($message = "", $username = "", $password = ""){
+	public function __construct($message, $username, $password){
 		$this->show =  "
 		<h2>Register new user</h2>
-    <form action='?register' method='post' enctype='multipart/form-data'>
+    <form action='?register' method='post'>
 				<fieldset>
 				<legend>Register a new user - Write username and password</legend>
 					<p id='RegisterView::Message'>{$message}</p>
