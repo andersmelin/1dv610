@@ -22,7 +22,7 @@ ini_set('display_errors', 'On');
 
 // chmod 777 -R ./db
 $postdata = new Postdata();
-echo '<pre>'; var_dump($postdata); echo '</pre>';
+
 if(isset($postdata->action)){
 
   if($postdata->action == "logout" && isset($_SESSION['username'])){
@@ -38,15 +38,19 @@ if(isset($postdata->action)){
     $controller = new Register($postdata->username, $postdata->password, $postdata->passwordrepeat);
 
   } else {
-    throw new Exception("Unhandled POST request: " . $postdata->action);
+    $message = '<pre>' . var_dump($postdata) . '</pre>';
+    //throw new Exception("Unhandled POST request: " . $postdata->action);
   }
 
 } else if(in_array("register", array_keys($_GET))){
     $maincontent = "Registrationform";
 }
-$message     = (isset($controller->message))     ? $controller->message     : "";
+
 $username    = (isset($controller->username))    ? $controller->username    : "";
 $password    = (isset($controller->password))    ? $controller->password    : "";
+if(!$message){
+  $message     = (isset($controller->message))     ? $controller->message     : "";
+}
 if(!isset($maincontent)){
   $maincontent = (isset($controller->maincontent)) ? $controller->maincontent : "Loginform";
 }
