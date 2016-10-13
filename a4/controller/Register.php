@@ -43,7 +43,13 @@ class Register extends Auth{
   }
 
   private function validateAll(){
-    return ($this->valideChars() && $this->validateUsernameLength() && $this->validatePasswordLength() && $this->comparePasswords() && !$this->user->exists($this->username));
+    return (
+      $this->valideChars() &&
+      $this->validateUsernameLength() &&
+      $this->validatePasswordLength() &&
+      $this->comparePasswords() &&
+      !$this->user->exists($this->username)
+    );
   }
 
   private function generateMessage(){

@@ -3,10 +3,10 @@
 
 class Loginform {
 
-	public $show;
+	private $loginform;
 
 	public function __construct($message, $username, $password) {
-		$this->show = "
+		$this->loginForm = "
 		<form method='post'>
 			<fieldset>
 				<legend>Login - enter Username and password</legend>
@@ -26,5 +26,9 @@ class Loginform {
 			</fieldset>
 		</form>
 		";
+	}
+
+	public function show(){
+		return $this->loginform;
 	}
 }

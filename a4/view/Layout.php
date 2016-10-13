@@ -16,10 +16,10 @@ class Layout {
   private $dateTimeParagraph;
 
   public function __construct($maincontent, $message, $username, $password){
-    $this->isLoggedIn = (new IsLoggedIn())->show;
-    $this->navlink = (new Navigationlink($maincontent))->show;
-    $this->dateTimeParagraph = (new DateTimeParagraph())->show;
-    $this->maincontent = (new $maincontent($message, $username, $password))->show;
+    $this->isLoggedIn = (new IsLoggedIn())->show();
+    $this->navlink = (new Navigationlink($maincontent))->show();
+    $this->dateTimeParagraph = (new DateTimeParagraph())->show();
+    $this->maincontent = (new $maincontent($message, $username, $password))->show();
   }
 
   public function render() {

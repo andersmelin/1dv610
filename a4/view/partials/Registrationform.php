@@ -2,10 +2,10 @@
 
 class Registrationform {
 
-	public $show;
+	private $registrationform;
 
 	public function __construct($message, $username, $password){
-		$this->show =  "
+		$this->registrationform =  "
 		<h2>Register new user</h2>
     <form action='?register' method='post'><!-- enctype='multipart/form-data' -->
 				<fieldset>
@@ -30,5 +30,9 @@ class Registrationform {
 				</fieldset>
 			</form>
     ";
+	}
+
+	public function show(){
+		return $this->registrationform;
 	}
 }

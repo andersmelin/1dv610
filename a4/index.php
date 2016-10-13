@@ -33,7 +33,7 @@ if(!empty($postdata->action)){
     $controller = new Login($postdata->username, $postdata->password);
 
   } else if($postdata->action == "Register"){
-    $controller = new Register($postdata->username, $pos Also, it might indicate a failure when you cannot express all your thoughts about a problem or an algorithm within code without comments. And finally, that means you expressed a  Also, it might indicate a failure when you cannot express all your thoughts about a problem or an algorithm within code without comments. And finally, that means you expressed a  Also, it might indicate a failure when you cannot express all your thoughts about a problem or an algorithm within code without comments. And finally, that means you expressed a ->password, $postdata->passwordrepeat);
+    $controller = new Register($postdata->username, $postdata->password, $postdata->passwordrepeat);
 
   } else {
     // echo '<pre>'; echo var_dump($postdata); echo'</pre>';
