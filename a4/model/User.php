@@ -6,7 +6,15 @@ class User{
 
   private $db;
 
-  public function __construct(){
+  private $username;
+  private $password;
+  private $passwordRepeat;
+
+  public function __construct($username = "", $password = "", $PasswordRepeat = ""){
+    $this->username;
+    $this->password;
+    $this->passwordRepeat;
+
     $this->db = (new Connection())->connect();
 
     if (!$this->db){
@@ -16,12 +24,28 @@ class User{
     $this->createNewTableIfNotExists();
   }
 
-  public function get($username){
-    $query = "SELECT username, password, cookiepassword FROM users WHERE username = '{$username}'";
+  private function createNewTableIfNotExists(){
+    $query = "CREATE TABLE IF NOT EXISTS users (
+      username VARCHAR (255) NOT NULL,
+      password VARCHAR (255) NOT NULL,
+      cookiepassword VARCHAR (255)
+    )";
+
+    $this->db->exec($query);
+  }
+
+  /*
+  ================
+    PUBLIC API:
+  ================
+  */
+  public function get(){
+    $query = "SELECT username, password, cookiepassword FROM users WHERE username = '{$this->username}'";
     $result = $this->db->query($query);
 
     $user = [];
 
+    // TODO: Remove while loop by examine the result and be straight to the point
     while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
       $user[] = [
         'username' => $row['username'],
@@ -30,36 +54,105 @@ class User{
       ];
     }
 
-    return (count($user)) ? $user[0] : false;;
+    return (count($user)) ? $user[0] : false;
   }
 
-  private function createNewTableIfNotExists(){
-    $createTableIfNotExists = "CREATE TABLE IF NOT EXISTS users (
-      username VARCHAR (255) NOT NULL,
-      password VARCHAR (255) NOT NULL,
-      cookiepassword VARCHAR (255)
-    )";
-
-    $this->db->exec($createTableIfNotExists);
-  }
-
-  public function create($username, $password){
-    $password = password_hash($password, PASSWORD_BCRYPT);
+  public function create(){
+    $this->validateRegistrationData($this->username, $this->password, $this->passwordRepeat);
+    $password = password_hash($this->password, PASSWORD_BCRYPT);
+    // TODO: Implement prepared statements instead
     $addNewUser = "INSERT INTO users(username, password, cookiepassword) VALUES('{$username}', '{$password}', null)";
     $this->db->exec($addNewUser);
   }
 
-  public function exists($username){
-    return !!$this->get($username);
+  public function authenticate(){
+    $this->validateLoginData($this->username, $this->password);
+    $user = $this->get($this->username);
+    // TODO: try-catch of password_verify
+    return !!password_verify($this->password, $this->user['password']);
   }
 
-  public function authenticate($username, $password){
-    $user = $this->get($username);
-    return !!password_verify($password, $user['password']);
+/*
+=========================
+  DATA VALIDATION BELOW
+=========================
+*/
+  private function usernameExists() {
+    if(!isset($this->username) || empty($this->username)) {
+      throw new Exception("Username is missing");
+    }
+
+    return true;
   }
 
-  public function authenticateUsingCookies($username, $cookiePassword){
-    $user = $this->get($username);
-    return $cookiePassword == $user->cookiepassword;
+  private function passwordExists() {
+    if(!isset($this->password) || empty($this->password)) {
+      throw new Exception("Password is missing");
+    }
+
+    return true;
+  }
+
+  private function authenticateUser() {
+    if(!$this->user->authenticate($this->username, $this->password)) {
+      throw new Exception("Wrong name or password");
+    }
+
+    return true;
+  }
+
+  private function exists(){
+    if(!!$this->get($this->username)) {
+      throw new Exception("User exists, pick another username.");
+    }
+
+    return true;
+  }
+
+  private function validateUsernameAndPasswordLength(){
+    if(!mb_strlen($this->username, "utf8") > 2 || !mb_strlen($this->password, "utf8") > 5){
+      $usernameShort = (!mb_strlen($username, "utf8") > 2) ? "" : "Username has too few characters, at least 3 characters. ";
+      $passwordShort = (!mb_strlen($password, "utf8") > 5) ? "" : "Password has too few characters, at least 6 characters.";
+
+      throw new Exception(trim($usernameShort . $passwordShort));
+    }
+
+    return true;
+  }
+
+  private function validateChars(){
+    if($this->username !== strip_tags($this->username) && $this->password !== strip_tags($this->password)){
+      throw new Exception("Username contains invalid characters.");
+    }
+
+    return true;
+  }
+
+  private function passwordEqualsPasswordRepeat(){
+    if($this->password !== $this->passwordRepeat){
+      throw new Exception("Passwords do not match.");
+    }
+
+    return true;
+  }
+
+  // Convenience methods for data validation:
+
+  private function validateLoginData() {
+    return (
+      $this->usernameExists($this->username) &&
+      $this->passwordExists($this->password) &&
+      $this->authenticateUser($this->password)
+    );
+  }
+
+  private function validateRegistrationData(){
+    return (
+      $this->validateChars($this->username, $this->password) &&
+      $this->validateUsernameAndPasswordLength($this->username, $this->password) &&
+      $this->validatePasswordLength($this->password) &&
+      $this->passwordEqualsPasswordRepeat($this->password, $this->passwordRepeat) &&
+      !$this->exists($this->username)
+    );
   }
 }

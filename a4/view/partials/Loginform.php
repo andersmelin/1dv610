@@ -5,7 +5,7 @@ class Loginform {
 
 	private $loginform;
 
-	public function __construct($message, $username, $password) {
+	public function __construct($message = "", $username = "", $password = "") {
 		$this->loginForm = "
 		<form method='post'>
 			<fieldset>

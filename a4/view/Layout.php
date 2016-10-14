@@ -3,10 +3,11 @@
 // INVLUDE PARTIALS
 require_once('partials/DateTimeParagraph.php');
 require_once('partials/IsLoggedIn.php');
-require_once('partials/Loginform.php');
 require_once('partials/Navigationlink.php');
-require_once('partials/Registrationform.php');
+
+require_once('partials/Loginform.php');
 require_once('partials/Logoutform.php');
+require_once('partials/Registrationform.php');
 
 class Layout {
 
@@ -15,11 +16,11 @@ class Layout {
   private $maincontent;
   private $dateTimeParagraph;
 
-  public function __construct($maincontent, $message, $username, $password){
+  public function __construct($partial){
     $this->isLoggedIn = (new IsLoggedIn())->show();
-    $this->navlink = (new Navigationlink($maincontent))->show();
+    $this->navlink = (new Navigationlink(get_class($partial)))->show();
     $this->dateTimeParagraph = (new DateTimeParagraph())->show();
-    $this->maincontent = (new $maincontent($message, $username, $password))->show();
+    $this->maincontent = $partial->show();
   }
 
   public function render() {

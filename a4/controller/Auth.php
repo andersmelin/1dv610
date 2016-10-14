@@ -9,7 +9,6 @@ abstract class Auth{
   public $message = "";
   public $username;
   public $password;
-  public $maincontent;
 
   protected $passwordRepeat;
   protected $cookiePassword;

@@ -4,12 +4,12 @@ class Navigationlink {
 
   private $navlink;
 
-	public function __construct($maincontent){
+	public function __construct($partialName){
 
-    if($maincontent == "Loginform"){
+    if($partialName == "Loginform"){
       $this->navlink = "<a href='?register'>Register a new user</a>";
 
-    } else if($maincontent == "Registrationform"){
+    } else if($partialName == "Registrationform"){
       $this->navlink = "<a href='?'>Back to login</a>";
     }
 	}
