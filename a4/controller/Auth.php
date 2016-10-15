@@ -6,6 +6,7 @@ abstract class Auth{
 
   public $success;
 
+  // TODO: Carefully remove message
   public $message = "";
   public $username;
   public $password;
@@ -15,16 +16,17 @@ abstract class Auth{
 
   protected $user;
 
-  public function __construct($username = "", $password = "", $cookiePassword = "", $passwordRepeat = ""){
+  public function __construct($username, $password, $cookiePassword, $passwordRepeat){
     try{
       $this->username = $username;
       $this->password = $password;
       $this->passwordRepeat = $passwordRepeat;
       $this->cookiePassword = $cookiePassword;
+
     } catch(Exception $e){
       throw new Exeption("Missing argument(s)");
     }
 
-    $this->user = new User();
+    $this->user = new User($username, $password, $cookiePassword, $passwordRepeat);
   }
 }

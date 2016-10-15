@@ -10,10 +10,11 @@ class User{
   private $password;
   private $passwordRepeat;
 
-  public function __construct($username = "", $password = "", $PasswordRepeat = ""){
-    $this->username;
-    $this->password;
-    $this->passwordRepeat;
+  public function __construct($username = "", $password = "", $passwordRepeat = ""){
+
+    $this->username = $username;
+    $this->password = $password;
+    $this->passwordRepeat = $passwordRepeat;
 
     $this->db = (new Connection())->connect();
 
@@ -36,7 +37,7 @@ class User{
 
   /*
   ================
-    PUBLIC API:
+     PUBLIC API
   ================
   */
   public function get(){
@@ -72,12 +73,34 @@ class User{
     return !!password_verify($this->password, $this->user['password']);
   }
 
-/*
-=========================
-  DATA VALIDATION BELOW
-=========================
-*/
-  private function usernameExists() {
+  /*
+  ========================================
+    DATA VALIDATION CONVENIENCE METHODS
+  ========================================
+  */
+  private function validateLoginData() {
+    return (
+      $this->usernameProvided() &&
+      $this->passwordProvided() &&
+      $this->authenticateUser()
+    );
+  }
+
+  private function validateRegistrationData(){
+    return (
+      $this->validateChars() &&
+      $this->validateUsernameAndPasswordLength() &&
+      $this->passwordEqualsPasswordRepeat() &&
+      !$this->exists()
+    );
+  }
+
+  /*
+  =================================
+    DATA VALIDATION CORE METHODS
+  =================================
+  */
+  private function usernameProvided() {
     if(!isset($this->username) || empty($this->username)) {
       throw new Exception("Username is missing");
     }
@@ -85,7 +108,7 @@ class User{
     return true;
   }
 
-  private function passwordExists() {
+  private function passwordProvided() {
     if(!isset($this->password) || empty($this->password)) {
       throw new Exception("Password is missing");
     }
@@ -94,7 +117,7 @@ class User{
   }
 
   private function authenticateUser() {
-    if(!$this->user->authenticate($this->username, $this->password)) {
+    if(!$this->authenticate($this->username, $this->password)) {
       throw new Exception("Wrong name or password");
     }
 
@@ -134,25 +157,5 @@ class User{
     }
 
     return true;
-  }
-
-  // Convenience methods for data validation:
-
-  private function validateLoginData() {
-    return (
-      $this->usernameExists($this->username) &&
-      $this->passwordExists($this->password) &&
-      $this->authenticateUser($this->password)
-    );
-  }
-
-  private function validateRegistrationData(){
-    return (
-      $this->validateChars($this->username, $this->password) &&
-      $this->validateUsernameAndPasswordLength($this->username, $this->password) &&
-      $this->validatePasswordLength($this->password) &&
-      $this->passwordEqualsPasswordRepeat($this->password, $this->passwordRepeat) &&
-      !$this->exists($this->username)
-    );
   }
 }
