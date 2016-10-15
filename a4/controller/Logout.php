@@ -1,5 +1,7 @@
 <?php
 
+// Kills the current login session if such a thing exists
+// One public methods "getPartial" returns the correct view partial
 class Logout{
 
   private $message = "Bye bye!";

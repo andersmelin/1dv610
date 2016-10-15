@@ -2,6 +2,7 @@
 
 require_once("db/Connection.php");
 
+// Validate user input before querying the user table. Two public methods: Authenticate and create
 class User{
 
   private $db;
@@ -31,24 +32,6 @@ class User{
      PUBLIC API
   ================
   */
-  public function get($username){
-    $query = "SELECT username, password, cookiepassword FROM users WHERE username = '{$username}'";
-    $result = $this->db->query($query);
-
-    $user = [];
-
-    // TODO: Remove while loop by examine the result and be straight to the point
-    while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
-      $user[] = [
-        'username' => $row['username'],
-        'password' => $row['password'],
-        'cookiepassword' => $row['cookiepassword']
-      ];
-    }
-
-    return (count($user)) ? $user[0] : false;
-  }
-
   public function create($username, $password, $passwordRepeat){
     $this->validateRegistrationData($username, $password, $passwordRepeat);
     $password = password_hash($password, PASSWORD_BCRYPT);
@@ -66,6 +49,29 @@ class User{
     }
 
     return true;
+  }
+
+  /*
+  ================
+    PRIVATE API
+  ================
+  */
+  private function get($username){
+    $query = "SELECT username, password, cookiepassword FROM users WHERE username = '{$username}'";
+    $result = $this->db->query($query);
+
+    $user = [];
+
+    // TODO: Remove while loop by examine the result and be straight to the point
+    while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
+      $user[] = [
+        'username' => $row['username'],
+        'password' => $row['password'],
+        'cookiepassword' => $row['cookiepassword']
+      ];
+    }
+
+    return (count($user)) ? $user[0] : false;
   }
 
   /*

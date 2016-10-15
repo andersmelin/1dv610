@@ -20,6 +20,6 @@ abstract class Auth{
       throw new Exeption("Missing argument(s)");
     }
 
-    $this->user = new User($username, $password, $passwordRepeat);
+    $this->user = new User();
   }
 }

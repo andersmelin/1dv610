@@ -33,11 +33,8 @@ class Controller {
     } else if($params->action == "showRegistrationform"){
       $this->partial = new Registrationform();
 
-    } else if($params->action == "showLoginform"){
-      $this->partial = new Loginform();
-
     } else {
-      throw new Exception("Unhandled request");
+      $this->partial = new Loginform();
     }
   }
 
