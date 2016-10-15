@@ -22,7 +22,7 @@ class Controller {
       $this->partial = (new Logout())->getPartial();
 
     } else if(isset($_SESSION['username'])){
-      $this->partial = (new Logout())->getPartial();
+      $this->partial = new Logoutform();
 
     } else if($params->action == "login"){
       $this->partial = (new Login($params->username, $params->password))->getPartial();

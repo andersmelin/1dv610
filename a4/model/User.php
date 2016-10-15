@@ -119,9 +119,9 @@ class User{
   }
 
   private function validateUsernameAndPasswordLength($username, $password){
-    if(!mb_strlen($username, "utf8") > 2 || !mb_strlen($password, "utf8") > 5){
-      $usernameShort = (!mb_strlen($username, "utf8") > 2) ? "" : "Username has too few characters, at least 3 characters. ";
-      $passwordShort = (!mb_strlen($password, "utf8") > 5) ? "" : "Password has too few characters, at least 6 characters.";
+    if(mb_strlen($username, "utf8") <= 2 || mb_strlen($password, "utf8") <= 5){
+      $usernameShort = (mb_strlen($username, "utf8") > 2) ? "" : "Username has too few characters, at least 3 characters. ";
+      $passwordShort = (mb_strlen($password, "utf8") > 5) ? "" : "Password has too few characters, at least 6 characters.";
 
       throw new Exception(trim($usernameShort . $passwordShort));
     }
