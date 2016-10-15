@@ -4,11 +4,8 @@ require_once("Auth.php");
 
 class Register extends Auth{
 
-  // TODO: Investigate why this is a protected member and not a private
-  protected $passwordRepeat;
-
   public function __construct($username = "", $password = "", $passwordRepeat = ""){
-    parent::__construct($username, $password, null, $passwordRepeat);
+    parent::__construct($username, $password, $passwordRepeat);
   }
 
   public function getPartial() {

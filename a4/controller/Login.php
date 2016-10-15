@@ -5,7 +5,7 @@ require_once("Auth.php");
 class Login extends Auth{
 
   public function __construct($username = "", $password = ""){
-    parent::__construct($username, $password, null, null);
+    parent::__construct($username, $password, null);
   }
 
   public function getPartial() {
@@ -15,7 +15,6 @@ class Login extends Auth{
       return new Logoutform("Welcome");
 
     } catch (Exception $e){
-      // TODO: Strip tags?
       return new Loginform($e->getMessage(), $this->username, $this->password);
     }
   }

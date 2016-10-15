@@ -4,21 +4,12 @@ require_once($_SERVER["ROOT"] . "model/User.php");
 
 abstract class Auth{
 
-  public $success;
-
-  // TODO: Carefully remove message
-  public $message = "";
-
-  // TODO: Make it private god damn!
-  public $username;
-  public $password;
-
+  protected $username;
+  protected $password;
   protected $passwordRepeat;
-  protected $cookiePassword;
-
   protected $user;
 
-  public function __construct($username, $password, $cookiePassword, $passwordRepeat){
+  public function __construct($username, $password, $passwordRepeat){
     // TODO: Make it fucking right. What kind of BS try block is this!!!
     try{
       $this->username = $username;
