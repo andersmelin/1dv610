@@ -15,12 +15,11 @@ abstract class Auth{
       $this->username = $username;
       $this->password = $password;
       $this->passwordRepeat = $passwordRepeat;
-      $this->cookiePassword = $cookiePassword;
 
     } catch(Exception $e){
       throw new Exeption("Missing argument(s)");
     }
 
-    $this->user = new User($username, $password, $cookiePassword, $passwordRepeat);
+    $this->user = new User($username, $password, $passwordRepeat);
   }
 }
