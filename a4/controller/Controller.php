@@ -31,7 +31,7 @@ class Controller {
       $this->partial = (new Register($params->username, $params->password, $params->passwordrepeat))->getPartial();
 
     } else if($params->action == "showRegistrationform"){
-      $this->partial = (new Register())->getPartial();
+      $this->partial = new Registrationform();
 
     } else if($params->action == "showLoginform"){
       $this->partial = new Loginform();
