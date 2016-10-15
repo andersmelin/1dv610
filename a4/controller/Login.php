@@ -12,7 +12,7 @@ class Login extends Auth{
     try {
       $this->user->authenticate($this->username, $this->password);
       $_SESSION['username'] = $this->username;
-      return new Logoutform();
+      return new Logoutform("message goes here");
 
     } catch (Exception $e){
       // TODO: Strip tags?

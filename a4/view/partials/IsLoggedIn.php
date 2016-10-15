@@ -6,7 +6,7 @@ class IsLoggedIn {
 
   public function __construct(){
     if (isset($_SESSION['username'])) {
-      $this->$isLoggedIn = "<h2>Logged in</h2>";
+      $this->isLoggedIn = "<h2>Logged in</h2>";
     }
   }
 

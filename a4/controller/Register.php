@@ -13,9 +13,8 @@ class Register extends Auth{
 
   public function getPartial() {
     try {
-      // TODO: Check requirements if passwordRepeat is a required parameter
       $this->user->create($this->username, $this->password, $this->passwordRepeat);
-      return new Loginform("Registered new user.", $username);
+      return new Loginform("Registered new user.", $this->username);
     } catch (Exception $e) {
       return new Registrationform($e->getMessage(), $this->username, $this->password);
     }

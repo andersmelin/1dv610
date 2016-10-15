@@ -8,6 +8,8 @@ abstract class Auth{
 
   // TODO: Carefully remove message
   public $message = "";
+
+  // TODO: Make it private god damn!
   public $username;
   public $password;
 
@@ -17,6 +19,7 @@ abstract class Auth{
   protected $user;
 
   public function __construct($username, $password, $cookiePassword, $passwordRepeat){
+    // TODO: Make it fucking right. What kind of BS try block is this!!!
     try{
       $this->username = $username;
       $this->password = $password;

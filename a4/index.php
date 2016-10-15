@@ -15,4 +15,4 @@ require_once('view/Layout.php');
 require_once('controller/Controller.php');
 
 // RENDER PAGE
-new Controller();
+(new Controller())->renderView();
