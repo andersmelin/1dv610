@@ -6,14 +6,13 @@ class Logout{
 
   private $message = "Bye bye!";
 
-  public function __construct(){
-    if(isset($_SESSION['username'])){
-      unset($_SESSION['username']);
+  public function __construct($sessionStatus){
+    if($sessionStatus->isLoggedIn()){
+
+      $sessionStatus->logOut();
     } else {
       $this->message = "";
     }
-
-    session_destroy();
   }
 
   public function getPartial() {

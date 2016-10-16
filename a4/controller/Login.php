@@ -8,24 +8,18 @@ class Login extends Auth{
   private $loginMessage;
   private $partial;
 
-  public function __construct($username = "", $password = ""){
+  public function __construct($username = "", $password = "",  $sessionStatus){
     parent::__construct($username, $password, null);
+    // User cannot login if already logged in
+    if($sessionStatus->isLoggedIn()){
+      return;
+    }
+
     $this->tryLogin();
-    $this->startUsersessionIfAuthenticated();
+    $sessionStatus->logIn($this->username);
     $this->setPartial();
   }
-
-  // public function getPartial() {
-  //   try {
-  //     $this->user->authenticate($this->username, $this->password);
-  //     $_SESSION['username'] = $this->username;
-  //     return new Logoutform("Welcome");
-  //
-  //   } catch (Exception $e){
-  //     return new Loginform($e->getMessage(), $this->username, $this->password);
-  //   }
-  // }
-
+  
   private function tryLogin() {
     try {
       $this->user->authenticate($this->username, $this->password);
@@ -35,12 +29,6 @@ class Login extends Auth{
     } catch (Exception $e){
       $this->loginStatus = false;
       $this->loginMessage = $e->getMessage();
-    }
-  }
-
-  private function startUsersessionIfAuthenticated() {
-    if ($this->loginStatus) {
-        $_SESSION['username'] = $this->username;
     }
   }
 

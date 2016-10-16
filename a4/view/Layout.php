@@ -16,8 +16,8 @@ class Layout {
   private $maincontent;
   private $dateTimeParagraph;
 
-  public function __construct($partial){
-    $this->isLoggedIn = (new IsLoggedIn())->show();
+  public function __construct($partial, $sessionStatus){
+    $this->isLoggedIn = (new IsLoggedIn($sessionStatus))->show();
     $this->navlink = (new Navigationlink(get_class($partial)))->show();
     $this->dateTimeParagraph = (new DateTimeParagraph())->show();
     $this->maincontent = $partial->show();
