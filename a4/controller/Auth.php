@@ -10,15 +10,9 @@ abstract class Auth{
   protected $user;
 
   public function __construct($username, $password, $passwordRepeat){
-    // TODO: Make it fucking right. What kind of BS try block is this!!!
-    try{
-      $this->username = $username;
-      $this->password = $password;
-      $this->passwordRepeat = $passwordRepeat;
-
-    } catch(Exception $e){
-      throw new Exeption("Missing argument(s)");
-    }
+    $this->username = $username;
+    $this->password = $password;
+    $this->passwordRepeat = $passwordRepeat;
 
     $this->user = new User();
   }
