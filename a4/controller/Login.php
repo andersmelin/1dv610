@@ -15,14 +15,14 @@ class Login extends Auth{
       return;
     }
 
-    $this->tryLogin();
-    $sessionStatus->logIn($this->username);
+    $this->tryLogin($sessionStatus);
     $this->setPartial();
   }
-  
-  private function tryLogin() {
+
+  private function tryLogin($sessionStatus) {
     try {
       $this->user->authenticate($this->username, $this->password);
+      $sessionStatus->logIn($this->username);
       $this->loginStatus = true;
       $this->loginMessage = "Welcome";
 

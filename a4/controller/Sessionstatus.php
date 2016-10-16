@@ -3,7 +3,7 @@
 class SessionStatus {
 
   public function __construct() {
-    $this->isLoggedIn = isset($_SESSION['username']);
+    $this->isLoggedIn = (isset($_SESSION['username']) && !empty($_SESSION['username']));
   }
 
   public function logOut() {
@@ -16,6 +16,6 @@ class SessionStatus {
   }
 
   public function isLoggedIn() {
-    return isset($_SESSION['username']);
+    return (isset($_SESSION['username']) && !empty($_SESSION['username']));
   }
 }
