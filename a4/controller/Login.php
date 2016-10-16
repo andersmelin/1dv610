@@ -2,6 +2,7 @@
 
 require_once("Auth.php");
 
+// public method getPartial returns the correct partial depending on auth success
 class Login extends Auth{
 
   private $loginStatus;
@@ -10,6 +11,7 @@ class Login extends Auth{
 
   public function __construct($username = "", $password = "",  $sessionStatus){
     parent::__construct($username, $password, null);
+
     // User cannot login if already logged in
     if($sessionStatus->isLoggedIn()){
       return;

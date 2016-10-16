@@ -8,8 +8,8 @@ class Logout{
 
   public function __construct($sessionStatus){
     if($sessionStatus->isLoggedIn()){
-
       $sessionStatus->logOut();
+
     } else {
       $this->message = "";
     }

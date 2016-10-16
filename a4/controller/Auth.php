@@ -2,6 +2,7 @@
 
 require_once($_SERVER["ROOT"] . "model/User.php");
 
+// Base class for database dependent classes
 abstract class Auth{
 
   protected $username;

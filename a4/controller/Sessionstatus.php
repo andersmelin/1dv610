@@ -2,6 +2,7 @@
 
 class SessionStatus {
 
+  // Starts, ends or returns the current session status
   public function __construct() {
     $this->isLoggedIn = (isset($_SESSION['username']) && !empty($_SESSION['username']));
   }

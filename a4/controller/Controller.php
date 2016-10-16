@@ -1,10 +1,16 @@
 <?php
 
+// INCLUDE VIEWS (Partials included in Layout)
+require_once('view/Layout.php');
+
+// INCLUDE HELPER CONTROLLERS
 require_once("IncomingParams.php");
+require_once("Sessionstatus.php");
+
+// INCLUDE USE CASE CONTROLLERS
 require_once("Login.php");
 require_once("Logout.php");
 require_once("Register.php");
-require_once("Sessionstatus.php");
 
 class Controller {
 
@@ -18,6 +24,7 @@ class Controller {
     $this->router();
   }
 
+  // This router takes care of auth (model) and/or sets the correct partial (view)
   private function router(){
     $params = $this->params;
 
@@ -41,6 +48,7 @@ class Controller {
     }
   }
 
+  // Sends the partial to the main view template and render the main view
   public function renderView() {
     (new Layout($this->partial, $this->sessionStatus))->render();
   }

@@ -8,8 +8,7 @@ ini_set('display_errors', 'On');
 // SET ROOT FOLDER FOR EASY ACCESS
 $_SERVER["ROOT"] = $_SERVER["DOCUMENT_ROOT"] . "/1dv610/a4/";
 
-// INCLUDE VIEWS
-require_once('view/Layout.php');
+
 
 // INCLUDE CONTROLLERS
 require_once('controller/Controller.php');

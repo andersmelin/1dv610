@@ -2,6 +2,7 @@
 
 require_once("Auth.php");
 
+// public method getPartial returns the correct partial depending on registration success
 class Register extends Auth{
 
   private $registratioonStatus;
